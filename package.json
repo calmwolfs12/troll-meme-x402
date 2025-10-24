@@ -2,7 +2,7 @@
   "type": "module",
   "dependencies": {
     "express": "^4.18.2",
-    "x402-express": "^0.3.6",
+    "@payai/x402-express": "^0.3.6",
     "@coinbase/x402": "^0.6.5"
   }
 }
