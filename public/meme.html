@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TROLL MEME Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Create your Meme</h1>
+  <input type="file" id="upload" accept="image/*">
+  <input type="text" id="topText" placeholder="Top text">
+  <input type="text" id="bottomText" placeholder="Bottom text">
+  <canvas id="memeCanvas"></canvas>
+  <button id="download">Download Meme</button>
+  <script>
+    const upload = document.getElementById('upload');
+    const canvas = document.getElementById('memeCanvas');
+    const ctx = canvas.getContext('2d');
+    upload.addEventListener('change', function() {
+      const file = this.files[0];
+      const img = new Image();
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+      };
+      img.src = URL.createObjectURL(file);
+    });
+    function generateMeme() {
+      const top = document.getElementById('topText').value;
+      const bottom = document.getElementById('bottomText').value;
+      ctx.font = '40px Impact';
+      ctx.fillStyle = 'white';
+      ctx.strokeStyle = 'black';
+      ctx.textAlign = 'center';
+      ctx.fillText(top, canvas.width/2, 50);
+      ctx.fillText(bottom, canvas.width/2, canvas.height - 20);
+      ctx.strokeText(top, canvas.width/2, 50);
+      ctx.strokeText(bottom, canvas.width/2, canvas.height - 20);
+    }
+    document.getElementById('download').addEventListener('click', generateMeme);
+  </script>
+</body>
+</html>
